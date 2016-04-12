@@ -280,9 +280,11 @@ public class KolodaView: UIView, DraggableCardDelegate {
     }
     
     func card(cardWasTapped card: DraggableCardView) {
-        let index = currentCardIndex + visibleCards.indexOf(card)!
-        
-        delegate?.koloda(self, didSelectCardAtIndex: UInt(index))
+        if let visibleCardIndex = visibleCards.indexOf(card) as? Int {
+            let index = currentCardIndex + visibleCardIndex
+            
+            delegate?.koloda(self, didSelectCardAtIndex: UInt(index))
+        }
     }
     
     func card(cardSwipeThresholdMargin card: DraggableCardView) -> CGFloat? {
